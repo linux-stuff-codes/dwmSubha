@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -12,7 +12,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_cyan[]        = "#444444";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -80,7 +80,7 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 static const char *qucmd[]  = { "qutebrowser", NULL };
 static const char *thunarcmd[]  = { "thunar", NULL };
-static const char *vicmd[]  = { "vifm", NULL };
+static const char *vicmd[]  = { "nnn", NULL };
 static const char *unicmd[]  = { "unipicker --command dmenu --copy", NULL };
 static const char *flamecmd[]  = { "flameshot","gui", NULL };
 
@@ -92,6 +92,8 @@ static const char *brupcmd[] = { "sudo", "light", "-A", "5", NULL };
 static const char *brdowncmd[] = { "sudo", "light", "-U", "5", NULL };
 static const char *maimer[] = { "maim -s format=png /dev/stdout |xclip -selection clipboard -t image/png -i", NULL };
 
+#define TERMINAL "alacritty"
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd }},
@@ -100,8 +102,8 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
 	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = brupcmd} },
 	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = brdowncmd} },
-	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,	                XK_f, spawn,          {.v = vicmd } },
+	{ MODKEY|ShiftMask,	                XK_f, spawn,        SHCMD(TERMINAL " -e nnn") },
+	{ MODKEY|ShiftMask,	                XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask|ShiftMask,	              XK_u, spawn,          {.v = unicmd } },
 	{ MODKEY,	                XK_x, spawn,          {.v = flamecmd } },
 	{ MODKEY,	                XK_w, spawn,          {.v = qucmd } },
@@ -119,7 +121,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
+	{ MODKEY,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -148,7 +150,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
-	{ MODKEY|ControlMask|ShiftMask,             XK_q,      quit,           {1} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} },
 };
 
 
