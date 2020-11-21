@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"alacritty", NULL,
+	"st", NULL,
 	"sxhkd", NULL,
 	"pactl", NULL,
 	"dwmblocks", NULL,
@@ -76,7 +76,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4,  "-l", "20", "-g", "3", NULL };
 
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 static const char *qucmd[]  = { "qutebrowser", NULL };
 static const char *thunarcmd[]  = { "thunar", NULL };
@@ -92,7 +92,7 @@ static const char *brupcmd[] = { "sudo", "light", "-A", "5", NULL };
 static const char *brdowncmd[] = { "sudo", "light", "-U", "5", NULL };
 static const char *maimer[] = { "maim -s format=png /dev/stdout |xclip -selection clipboard -t image/png -i", NULL };
 
-#define TERMINAL "alacritty"
+#define TERMINAL "st"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
