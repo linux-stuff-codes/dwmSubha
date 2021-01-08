@@ -20,8 +20,8 @@ static const char *colors[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"st -e /usr/bin/fish", NULL,
-	"sxhkd", NULL,
+	"st","-e","/usr/bin/fish", NULL,
+	// "sxhkd", NULL,
 	"pactl", NULL,
 	"dwmblocks", NULL,
 	"zsh","-c","~/.fehbg", NULL,
@@ -76,20 +76,20 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4,  "-l", "20", "-g", "3", NULL };
 
-static const char *termcmd[]  = { "st -e /usr/bin/fish", NULL };
+static const char *termcmd[]  = { "st","-e","/usr/bin/fish", NULL };
 
 static const char *qucmd[]  = { "qutebrowser", NULL };
 static const char *thunarcmd[]  = { "thunar", NULL };
-static const char *vicmd[]  = { "nnn", NULL };
 static const char *unicmd[]  = { "unipicker --command dmenu --copy", NULL };
+static const char *passcmd[]  = { "bitwarden-dmenu --dmenu-args='-i' --clear-clipboard 30 --session-timeout 100 --sync-vault-after 3600 --on-error 'xargs notify-send --urgency=low'", NULL };
 static const char *flamecmd[]  = { "flameshot","gui", NULL };
 
 // Keys
 static const char *mutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
 static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
-static const char *brupcmd[] = { "sudo", "light", "-A", "5", NULL };
-static const char *brdowncmd[] = { "sudo", "light", "-U", "5", NULL };
+static const char *brupcmd[] = { "light", "-A", "5", NULL };
+static const char *brdowncmd[] = { "light", "-U", "5", NULL };
 static const char *maimer[] = { "maim -s format=png /dev/stdout |xclip -selection clipboard -t image/png -i", NULL };
 
 #define TERMINAL "st"
@@ -102,8 +102,9 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
 	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = brupcmd} },
 	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = brdowncmd} },
-	{ MODKEY|ShiftMask,	                XK_f, spawn,        SHCMD(TERMINAL " -e nnn") },
-	{ MODKEY|ShiftMask,	                XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,	                XK_f, spawn,        SHCMD(TERMINAL " -e vifm") },
+	{ MODKEY|ShiftMask,	                XK_v, spawn,        SHCMD(TERMINAL "-e bitwarden-dmenu") },
+	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask|ShiftMask,	              XK_u, spawn,          {.v = unicmd } },
 	{ MODKEY,	                XK_x, spawn,          {.v = flamecmd } },
 	{ MODKEY,	                XK_w, spawn,          {.v = qucmd } },
